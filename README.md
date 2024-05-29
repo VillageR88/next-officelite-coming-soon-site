@@ -19,7 +19,7 @@ Node.js (see version in: [.nvmrc](./.nvmrc)) is required.
 npm ci
 
 # start development server
-npm start
+npm run dev
 
 # lint code
 npm run lint
