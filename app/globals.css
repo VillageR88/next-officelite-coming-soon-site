@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  @apply shadow-[0_0_0_30px_white_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
+  -webkit-text-fill-color: black;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-text-size-adjust: none;
+}
+:is(.dark) input:-webkit-autofill {
+  -webkit-text-fill-color: white;
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  background-clip: content-box;
+  border: 2px solid #86a2a5;
+  border-radius: 50%;
+}
+
+h1 {
+  @apply text-center text-[32px] font-extrabold leading-[40px] xl:text-[48px] xl:leading-[56px];
+}
+
+h3,
+label {
+  @apply text-[24px] font-extrabold xl:text-[32px];
+}
+
+h2,
+h4 {
+  @apply text-[18px] font-extrabold;
+}
+
+p {
+  @apply text-[15px] leading-[25px];
+}
