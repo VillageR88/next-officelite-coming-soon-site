@@ -21,7 +21,7 @@ export default function DataProvider({ children }: { children: React.ReactNode }
   });
 
   useEffect(() => {
-    if (timerValue.days === '00' && timerValue.hours === '00' && timerValue.mi === '00' && timerValue.sec === '00') {
+    const timeFunction = () => {
       const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
       const currentDifferenceAsDate = new Date(currentDifference);
       setTimerValue({
@@ -30,16 +30,12 @@ export default function DataProvider({ children }: { children: React.ReactNode }
         mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
         sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
       });
+    };
+    if (timerValue.days === '00' && timerValue.hours === '00' && timerValue.mi === '00' && timerValue.sec === '00') {
+      timeFunction();
     }
     const interval = setInterval(() => {
-      const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
-      const currentDifferenceAsDate = new Date(currentDifference);
-      setTimerValue({
-        days: (currentDifferenceAsDate.getDate() - 1).toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
-        hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-        mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-        sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-      });
+      timeFunction();
     }, 100);
 
     return () => {
