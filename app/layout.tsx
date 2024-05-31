@@ -1,12 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Kumbh_Sans } from 'next/font/google';
+import DataProvider from '@/app/_providers/DataContext';
 
-const manrope = Manrope({
+const kumbhSans = Kumbh_Sans({
   display: 'swap',
-  weight: ['200', '300', '400', '500', '600', '700', '800'],
-  variable: '--font-manrope',
-  subsets: ['latin-ext'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-kumbhSans',
+  subsets: ['latin', 'latin-ext'],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <meta property="og:image" content={undefined} />
       </head>
-      <body className={`${manrope.variable} bg-[#080C20]`}>{children}</body>
+      <body className={`${kumbhSans.variable} overflow-x-clip bg-[#FAFAFA]`}>
+        <DataProvider>{children}</DataProvider>
+      </body>
     </html>
   );
 }

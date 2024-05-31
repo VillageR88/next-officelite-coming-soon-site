@@ -12,7 +12,7 @@ const config: Config = {
         tablet: '700px',
       },
       fontFamily: {
-        manrope: ['var(--font-manrope)'],
+        kumbhSans: ['var(--font-kumbhSans)'],
       },
       colors: {
         gray1: '#121212',
