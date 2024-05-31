@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import logo from '@/public/assets/shared/logo.svg';
 import Timer from '../components/Timer';
+import CustomSelect from '@/app/sign-up/CustomSelect';
+
 export default function SignUp() {
   const firstColItems = {
     title: 'Work smarter. Save time.',
@@ -36,7 +38,28 @@ export default function SignUp() {
               backgroundColor="bg-[#5175FF]/10"
             />
           </div>
-          <div className="mt-[126px] h-[508px] w-[445px] rounded-[13px] bg-[#FFFFFF] shadow-2xl"></div>
+          <form className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center divide-y divide-[#747B95]/50 rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl">
+            <div className="flex w-full flex-col">
+              <input id="name" type="text" placeholder="Name" autoComplete="name" />
+            </div>
+            <div className="flex w-full flex-col">
+              <input id="email" type="email" placeholder="Email Address" autoComplete="email" />
+            </div>
+            <div className="flex w-full flex-col">
+              <CustomSelect />
+            </div>
+            <div className="flex w-full flex-col">
+              <input id="phone" type="tel" placeholder="Phone Number" autoComplete="tel" />
+            </div>
+            <div className="flex w-full flex-col">
+              <input id="company" placeholder="Company" type="text" />
+            </div>
+            <div className="w-full">
+              <button type="submit" className="mt-[40px] h-[56px] w-full bg-[#5175FF]">
+                Get on the list
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </main>

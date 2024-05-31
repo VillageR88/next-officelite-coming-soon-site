@@ -41,3 +41,7 @@ p {
 button {
   @apply h-[56px] w-[171px] rounded-[28px] text-[16px] font-bold leading-[28px] text-[#FFFFFF];
 }
+
+input {
+  @apply h-[69px] w-full px-[16px] text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
+}
