@@ -1,4 +1,5 @@
 import Timer from '../components/Timer';
+import ButtonGetStarted from '../components/ButtonGetStarted';
 
 export default function Footer() {
   return (
@@ -10,9 +11,7 @@ export default function Footer() {
           textColor3="text-[#FFFFFF]/50"
           backgroundColor="bg-[#333950]"
         />
-        <button type="button" className="h-[56px] w-[171px] bg-[#5175FF] transition-colors hover:bg-[#829CFF]">
-          Get Started
-        </button>
+        <ButtonGetStarted />
       </div>
     </footer>
   );

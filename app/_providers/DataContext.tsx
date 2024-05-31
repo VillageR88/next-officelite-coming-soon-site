@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useMemo } from 'react';
 import { TimerValue } from '@/app/_lib/interfaces';
 
 export const DataContext = createContext(
@@ -9,28 +9,43 @@ export const DataContext = createContext(
   },
 );
 export default function DataProvider({ children }: { children: React.ReactNode }) {
-  const currentDate = new Date();
-  const current4thOfNextMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 4);
-  const [currentDifference, setCurrentDifference] = useState<number>(
-    current4thOfNextMonth.getTime() - currentDate.getTime(),
-  );
-  const currentDifferenceAsDate = new Date(currentDifference);
-  const timerValue = {
-    days: (currentDifferenceAsDate.getDate() - 1).toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
-    hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-    mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-    sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-  } as TimerValue;
+  const current4thOfNextMonth = useMemo(() => {
+    const currentDate = new Date();
+    return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 4);
+  }, []);
+  const [timerValue, setTimerValue] = useState<TimerValue>({
+    days: '00',
+    hours: '00',
+    mi: '00',
+    sec: '00',
+  });
 
   useEffect(() => {
+    if (timerValue.days === '00' && timerValue.hours === '00' && timerValue.mi === '00' && timerValue.sec === '00') {
+      const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
+      const currentDifferenceAsDate = new Date(currentDifference);
+      setTimerValue({
+        days: (currentDifferenceAsDate.getDate() - 1).toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
+        hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+      });
+    }
     const interval = setInterval(() => {
-      setCurrentDifference((prev) => prev - 1000);
-    }, 1000);
+      const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
+      const currentDifferenceAsDate = new Date(currentDifference);
+      setTimerValue({
+        days: (currentDifferenceAsDate.getDate() - 1).toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
+        hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+      });
+    }, 100);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [current4thOfNextMonth, timerValue.days, timerValue.hours, timerValue.mi, timerValue.sec]);
   return (
     <DataContext.Provider
       value={{

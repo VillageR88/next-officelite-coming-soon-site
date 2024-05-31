@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import image1 from '@/public/assets/home/illustration-charts.svg';
+import ButtonGetStarted from '../components/ButtonGetStarted';
 
 export default function MainRow1() {
   return (
@@ -12,9 +13,7 @@ export default function MainRow1() {
             collaboration platform built with an intuitive interface to improve productivity.
           </p>
         </section>
-        <button type="button" className="bg-[#5175FF] transition-colors hover:bg-[#829CFF]">
-          Get Started
-        </button>
+        <ButtonGetStarted />
       </div>
       <Image className="min-h-[531px] min-w-[475px]" src={image1 as string} alt="illustration charts" priority />
     </div>
