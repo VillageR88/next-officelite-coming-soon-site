@@ -10,9 +10,9 @@ export default function SignUp() {
 
   return (
     <main className="relative z-0 flex min-h-dvh justify-center font-kumbhSans sm:min-h-screen">
-      <div className="absolute -z-10 flex size-full">
-        <div className="flex min-h-full w-[70.83333333333333%] flex-col items-start bg-white"></div>
-        <div className="min-h-full w-[29.16666666666667%] bg-[#25293A]"></div>
+      <div className="absolute -z-10 flex size-full bg-white">
+        <div className="flex min-h-full w-[calc(50%)] flex-col items-start bg-white"></div>
+        <div className="ml-[600px] min-h-full w-1/2 bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[calc(0%-760px)_calc(0%-780px)] bg-no-repeat"></div>
       </div>
       <div className="flex w-full max-w-[1110px] flex-col">
         <Image
@@ -23,7 +23,7 @@ export default function SignUp() {
           alt="logo"
           priority
         />
-        <div className="flex">
+        <div className="flex gap-[125px]">
           <div className="mt-[154px] flex max-w-[540px] flex-col gap-[40px]">
             <section className="flex flex-col gap-[24px]">
               <h1 className="text-[#333950]">{firstColItems.title}</h1>
@@ -36,6 +36,7 @@ export default function SignUp() {
               backgroundColor="bg-[#5175FF]/10"
             />
           </div>
+          <div className="mt-[126px] h-[508px] w-[445px] rounded-[13px] bg-[#FFFFFF] shadow-2xl"></div>
         </div>
       </div>
     </main>
