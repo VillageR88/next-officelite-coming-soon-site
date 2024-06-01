@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useState, useEffect, useMemo, Dispatch, SetStateAction } from 'react';
-import { TimerValue } from '@/app/_lib/interfaces';
+import { TimerValue, Package } from '@/app/_lib/interfaces';
 
 export const DataContext = createContext(
   {} as {
@@ -10,14 +10,14 @@ export const DataContext = createContext(
     setShowMessage: Dispatch<SetStateAction<boolean>>;
     selectedOption: string;
     setSelectedOption: Dispatch<SetStateAction<string>>;
-    preferredOption: string;
-    setPreferredOption: Dispatch<SetStateAction<string>>;
+    preferredOption: Package;
+    setPreferredOption: Dispatch<SetStateAction<Package>>;
   },
 );
 export default function DataProvider({ children }: { children: React.ReactNode }) {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
-  const [preferredOption, setPreferredOption] = useState<string>('Basic Pack');
+  const [preferredOption, setPreferredOption] = useState<Package>(Package.Basic);
   const current4thOfNextMonth = useMemo(() => {
     const currentDate = new Date();
     return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 4);

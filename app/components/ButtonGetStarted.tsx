@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Routes } from '../routes';
 import { DataContext } from '../_providers/DataContext';
 import { useContext } from 'react';
+import { Package } from '../_lib/interfaces';
 
 export default function ButtonGetStarted() {
   const { setPreferredOption } = useContext(DataContext);
@@ -10,7 +11,7 @@ export default function ButtonGetStarted() {
     <Link href={Routes.signUp}>
       <button
         onClick={() => {
-          setPreferredOption('Basic Pack');
+          setPreferredOption(Package.Basic);
         }}
         type="button"
         className="h-[56px] w-[171px] bg-[#5175FF] transition-colors hover:bg-[#829CFF]"

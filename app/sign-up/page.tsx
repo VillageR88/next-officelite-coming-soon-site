@@ -15,23 +15,24 @@ import { useRouter } from 'next/navigation';
 import { Routes } from '@/app/routes';
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
+import { Package } from '@/app/_lib/interfaces';
 
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const { preferredOption } = useContext(DataContext);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>(preferredOption);
+  const [selectedOption, setSelectedOption] = useState<Package>(preferredOption);
   const listboxRef = useRef<HTMLLIElement[]>([]);
   const options = useMemo(
     () => [
-      { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
-      { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99', label3: '$4.99' },
-      { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99', label3: '$9.99' },
+      { value: Package.Basic, label1: Package.Basic, label2: 'Free' },
+      { value: Package.Pro, label1: Package.Pro, label2: '$9.99', label3: '$4.99' },
+      { value: Package.Ultimate, label1: Package.Ultimate, label2: '$19.99', label3: '$9.99' },
     ],
     [],
   );
   const optionsIndex = options.findIndex((option) => option.value === selectedOption);
-  const handleOptionClick = (value: string) => {
+  const handleOptionClick = (value: Package) => {
     setSelectedOption(value);
     setIsOpen(false);
   };

@@ -11,3 +11,9 @@ export interface ErrorData {
   phone: boolean;
   company: boolean;
 }
+
+export enum Package {
+  Basic = 'Basic Pack',
+  Pro = 'Pro Pack',
+  Ultimate = 'Ultimate Pack',
+}

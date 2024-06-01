@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Routes } from '../routes';
 import { DataContext } from '../_providers/DataContext';
 import { useContext } from 'react';
+import { Package } from '../_lib/interfaces';
 
 const itemList = [
   {
@@ -19,7 +20,7 @@ const itemList = [
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
     text: 'Try for Free',
-    preferredValue: 'Basic Pack',
+    preferredValue: Package.Basic,
   },
   {
     title: 'Pro',
@@ -35,7 +36,7 @@ const itemList = [
     buttonTextColor: 'text-[#5175FF] hover:text-[#829CFF]',
     buttonBackgroundColor: 'bg-[#FFFFFF]',
     text: 'Now only $4.99 !',
-    preferredValue: 'Pro Pack',
+    preferredValue: Package.Pro,
   },
   {
     title: 'Ultimate',
@@ -51,7 +52,7 @@ const itemList = [
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
     text: 'Now only $9.99 !',
-    preferredValue: 'Ultimate Pack',
+    preferredValue: Package.Ultimate,
   },
 ];
 const MiddleBox = ({
@@ -83,7 +84,7 @@ const MiddleBox = ({
   buttonTextColor: string;
   buttonBackgroundColor: string;
   text: string;
-  preferredValue: string;
+  preferredValue: Package;
 }) => {
   const { setPreferredOption } = useContext(DataContext);
 
