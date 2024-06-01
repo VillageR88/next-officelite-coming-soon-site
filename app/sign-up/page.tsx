@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import logo from '@/public/assets/shared/logo.svg';
+import arrowIcon from '@/public/assets/sign-up/icon-arrow-down.svg';
 import Timer from '../components/Timer';
 import { useEffect, useState, useRef } from 'react';
 
@@ -48,41 +49,50 @@ function CustomSelect() {
         aria-expanded={isOpen}
         className="h-[69px] w-full px-4 text-left text-black"
       >
-        <div className="flex gap-[8px]">
-          <span className="text-[#333950]">{options.find((option) => option.value === selectedOption)?.label1}</span>
-          <span className="text-[#333950]/40">{options.find((option) => option.value === selectedOption)?.label2}</span>
+        <div className="flex items-center justify-between">
+          <div className="flex gap-[8px]">
+            <span className="text-[#333950]">{options.find((option) => option.value === selectedOption)?.label1}</span>
+            <span className="text-[#333950]/40">
+              {options.find((option) => option.value === selectedOption)?.label2}
+            </span>
+          </div>
+          <Image
+            className={`h-[8px] w-[13px] transition duration-300 ${isOpen ? 'scale-100' : 'scale-[-100%]'}`}
+            width={13}
+            height={8}
+            src={arrowIcon as string}
+            alt="arrow icon"
+          />
         </div>
       </button>
-      {isOpen && (
-        <ul
-          title={selectedOption}
-          role="listbox"
-          className="absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl"
-        >
-          {options.map((option, index) => (
-            <li
-              tabIndex={0}
-              title={option.label1}
-              key={index}
-              value={option.value}
-              role="option"
-              aria-selected={option.value === selectedOption ? 'true' : 'false'}
-              onClick={() => {
+      <ul
+        title={selectedOption}
+        role="listbox"
+        className={`${isOpen ? 'opacity-100' : 'opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-300`}
+      >
+        {options.map((option, index) => (
+          <li
+            tabIndex={isOpen ? 0 : -1}
+            title={option.label1}
+            key={index}
+            value={option.value}
+            role="option"
+            aria-selected={option.value === selectedOption ? 'true' : 'false'}
+            onClick={() => {
+              handleOptionClick(option.value);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
                 handleOptionClick(option.value);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  handleOptionClick(option.value);
-                }
-              }}
-              className={`${index === 0 ? 'h-[68px] rounded-t-[8px] pt-[8px]' : index === options.length - 1 ? 'h-[68px] rounded-b-[8px] pb-[8px]' : 'h-[60px]'} flex  cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
-            >
-              <span className="text-[#11121a]">{option.label1}</span>
-              <span className="text-[#333950]/40">{option.label2}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+              }
+            }}
+            className={`${index === 0 ? 'h-[68px] rounded-t-[8px] pt-[8px]' : index === options.length - 1 ? 'h-[68px] rounded-b-[8px] pb-[8px]' : 'h-[60px]'} flex  cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
+          >
+            <span className="text-[#11121a]">{option.label1}</span>
+            <span className="text-[#333950]/40">{option.label2}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
