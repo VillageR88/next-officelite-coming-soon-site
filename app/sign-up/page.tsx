@@ -17,14 +17,16 @@ import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
+  const { preferredOption } = useContext(DataContext);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>('Basic Pack');
+  const [selectedOption, setSelectedOption] = useState<string>(preferredOption);
   const listboxRef = useRef<HTMLLIElement[]>([]);
   const options = useMemo(
     () => [
       { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
-      { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99' },
-      { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99' },
+      { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99', label3: '$4.99' },
+      { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99', label3: '$9.99' },
     ],
     [],
   );
@@ -95,8 +97,21 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
         <div className="flex items-center justify-between">
           <div className="flex gap-[8px]">
             <span className="text-[#333950]">{options.find((option) => option.value === selectedOption)?.label1}</span>
-            <span className="text-[#333950]/40">
+            <span
+              className={`text-[#333950]/40 ${
+                options.find((option) => option.value === selectedOption)?.label3
+                  ? 'line-through decoration-[#F05B5B]'
+                  : ''
+              }`}
+            >
               {options.find((option) => option.value === selectedOption)?.label2}
+            </span>
+            <span
+              className={
+                options.find((option) => option.value === selectedOption)?.label3 ? 'text-[#F05B5B]' : 'hidden'
+              }
+            >
+              {options.find((option) => option.value === selectedOption)?.label3}
             </span>
           </div>
           <Image
@@ -136,15 +151,20 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
             }}
             className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center justify-between px-[32px] text-[16px] font-bold hover:bg-[#5175FF]/10`}
           >
-            <div className="flex gap-[8px]">
+            <div className="flex items-center gap-[8px]">
               <span className="text-[#11121a]">{option.label1}</span>
-              <span className="text-[#333950]/40">{option.label2}</span>
+              <div className="flex gap-2">
+                <span className={`text-[#333950]/40 ${option.label3 ? 'line-through decoration-[#F05B5B]' : ''}`}>
+                  {option.label2}
+                </span>
+                <span className={`text-[#333950] ${option.label3 ? 'text-[#F05B5B]' : ''}`}>{option.label3}</span>
+              </div>
             </div>
             <Image
               className={`h-[12px] w-[15px] ${option.value === selectedOption ? 'block' : 'hidden'}`}
               width={15}
               height={12}
-              src={option.value === selectedOption ? (iconCheck as string) : ''}
+              src={iconCheck as string}
               alt="check icon"
             />
           </li>

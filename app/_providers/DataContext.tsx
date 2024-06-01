@@ -10,11 +10,14 @@ export const DataContext = createContext(
     setShowMessage: Dispatch<SetStateAction<boolean>>;
     selectedOption: string;
     setSelectedOption: Dispatch<SetStateAction<string>>;
+    preferredOption: string;
+    setPreferredOption: Dispatch<SetStateAction<string>>;
   },
 );
 export default function DataProvider({ children }: { children: React.ReactNode }) {
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
+  const [preferredOption, setPreferredOption] = useState<string>('Basic Pack');
   const current4thOfNextMonth = useMemo(() => {
     const currentDate = new Date();
     return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 4);
@@ -60,6 +63,8 @@ export default function DataProvider({ children }: { children: React.ReactNode }
         setShowMessage,
         selectedOption,
         setSelectedOption,
+        preferredOption,
+        setPreferredOption,
       }}
     >
       {children}

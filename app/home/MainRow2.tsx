@@ -1,3 +1,9 @@
+'use client';
+import Link from 'next/link';
+import { Routes } from '../routes';
+import { DataContext } from '../_providers/DataContext';
+import { useContext } from 'react';
+
 const itemList = [
   {
     title: 'Basic',
@@ -12,6 +18,8 @@ const itemList = [
     backgroundImage: undefined,
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
+    text: 'Try for Free',
+    preferredValue: 'Basic Pack',
   },
   {
     title: 'Pro',
@@ -26,6 +34,8 @@ const itemList = [
     backgroundImage: "bg-[url('../public/assets/home/bg-pattern-pricing.svg')]",
     buttonTextColor: 'text-[#5175FF] hover:text-[#829CFF]',
     buttonBackgroundColor: 'bg-[#FFFFFF]',
+    text: 'Now only $4.99 !',
+    preferredValue: 'Pro Pack',
   },
   {
     title: 'Ultimate',
@@ -40,6 +50,8 @@ const itemList = [
     backgroundImage: undefined,
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
+    text: 'Now only $9.99 !',
+    preferredValue: 'Ultimate Pack',
   },
 ];
 const MiddleBox = ({
@@ -55,6 +67,8 @@ const MiddleBox = ({
   backgroundImage,
   buttonTextColor,
   buttonBackgroundColor,
+  text,
+  preferredValue,
 }: {
   title: string;
   paragraph1: string;
@@ -68,7 +82,11 @@ const MiddleBox = ({
   backgroundImage?: string;
   buttonTextColor: string;
   buttonBackgroundColor: string;
+  text: string;
+  preferredValue: string;
 }) => {
+  const { setPreferredOption } = useContext(DataContext);
+
   return (
     <li
       className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} flex h-[508px] w-[350px] flex-col items-center rounded-[13px] bg-[50%_102%] bg-no-repeat py-[40px]`}
@@ -79,11 +97,18 @@ const MiddleBox = ({
       <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
       <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
       <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>
-      <button
-        className={`${[buttonBackgroundColor, buttonTextColor].map((item) => item).join(' ')} mt-[32px] h-[56px] w-[171px] transition-colors`}
-      >
-        Try for Free
-      </button>
+      <Link href={Routes.signUp}>
+        <button
+          onClick={() => {
+            console.log('button clicked');
+            setPreferredOption(preferredValue);
+          }}
+          type="button"
+          className={`${[buttonBackgroundColor, buttonTextColor].map((item) => item).join(' ')} mt-[32px] h-[56px] w-[171px] transition-colors`}
+        >
+          {text}
+        </button>
+      </Link>
     </li>
   );
 };
@@ -107,6 +132,8 @@ export default function MainRow2() {
               backgroundImage={item.backgroundImage}
               buttonTextColor={item.buttonTextColor}
               buttonBackgroundColor={item.buttonBackgroundColor}
+              text={item.text}
+              preferredValue={item.preferredValue}
             />
           );
         })}
