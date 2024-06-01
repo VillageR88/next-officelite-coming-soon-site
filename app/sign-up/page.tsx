@@ -136,7 +136,7 @@ export default function SignUp() {
       number: number;
     },
     FormData
-  >((state, payload) => CreateInvoiceContactForm(state, payload, buttonRef.current?.value ?? ''), {
+  >((state, payload) => CreateInvoiceContactForm(state, payload, buttonRef.current?.value), {
     errorData: { name: false, email: false, phone: false, company: false },
     number: 0,
   });

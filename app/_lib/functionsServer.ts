@@ -6,7 +6,7 @@ import { ErrorData } from '@/app/_lib/interfaces';
 export async function CreateInvoiceContactForm(
   prev: { errorData: ErrorData; number: number },
   formData: FormData,
-  selectedOption: string,
+  selectedOption: string | undefined,
 ): Promise<{ errorData: ErrorData; number: number }> {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -18,6 +18,7 @@ export async function CreateInvoiceContactForm(
   });
   console.log(selectedOption);
   if (!process.env.EMAIL) return prev;
+  if (!selectedOption) return prev;
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   let phone = formData.get('phone') as string;
