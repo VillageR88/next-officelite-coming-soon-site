@@ -6,7 +6,7 @@ import iconArrow from '@/public/assets/sign-up/icon-arrow-down.svg';
 import iconCross from '@/public/assets/sign-up/icon-cross.svg';
 import iconCheck from '@/public/assets/sign-up/icon-check.svg';
 import Timer from '../components/Timer';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
 import { useFormState, useFormStatus } from 'react-dom';
 import type { ErrorData } from '@/app/_lib/interfaces';
@@ -17,11 +17,17 @@ import { Routes } from '@/app/routes';
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>('Basic Pack');
-  const options = [
-    { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
-    { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99' },
-    { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99' },
-  ];
+  const listboxRef = useRef<HTMLLIElement[]>([]);
+
+  const options = useMemo(
+    () => [
+      { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
+      { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99' },
+      { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99' },
+    ],
+    [],
+  );
+  const optionsIndex = options.findIndex((option) => option.value === selectedOption);
 
   const handleOptionClick = (value: string) => {
     setSelectedOption(value);
@@ -41,6 +47,34 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
     };
   }, [buttonRef, isOpen]);
 
+  useEffect(() => {
+    if (isOpen) listboxRef.current[optionsIndex]?.focus();
+  }, [isOpen, optionsIndex]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        if (isOpen) setIsOpen(false);
+      }
+      if (isOpen) {
+        if (event.key === 'ArrowDown' || event.key === 'Tab') {
+          event.preventDefault();
+          const nextIndex = optionsIndex + 1 >= options.length ? 0 : optionsIndex + 1;
+          setSelectedOption(options[nextIndex].value);
+        }
+        if (event.key === 'ArrowUp' || (event.key === 'Tab' && event.shiftKey)) {
+          event.preventDefault();
+          const nextIndex = optionsIndex - 1 < 0 ? options.length - 1 : optionsIndex - 1;
+          setSelectedOption(options[nextIndex].value);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, options, optionsIndex]);
+
   return (
     <div className="relative">
       <button
@@ -55,6 +89,7 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
         }}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-controls="select-listbox"
         className="h-[69px] w-full px-4 text-left text-black"
       >
         <div className="flex items-center justify-between">
@@ -74,12 +109,17 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
         </div>
       </button>
       <ul
+        id="select-listbox"
         title={selectedOption}
         role="listbox"
         className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute ml-[-1%] mt-[8px] flex w-[102%] flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[200]`}
       >
         {options.map((option, index) => (
           <li
+            ref={(element) => {
+              if (!element) return;
+              listboxRef.current[index] = element;
+            }}
             tabIndex={isOpen ? 0 : -1}
             title={option.label1}
             key={index}
