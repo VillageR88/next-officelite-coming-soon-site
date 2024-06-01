@@ -89,7 +89,7 @@ function CustomSelect() {
                 handleOptionClick(option.value);
               }
             }}
-            className={`${index === 0 ? 'h-[68px] rounded-t-[8px] pt-[8px]' : index === options.length - 1 ? 'h-[68px] rounded-b-[8px] pb-[8px]' : 'h-[60px]'} flex  cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
+            className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
           >
             <span className="text-[#11121a]">{option.label1}</span>
             <span className="text-[#333950]/40">{option.label2}</span>
