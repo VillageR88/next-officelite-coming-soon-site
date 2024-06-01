@@ -61,6 +61,7 @@ function CustomSelect() {
         >
           {options.map((option, index) => (
             <li
+              tabIndex={0}
               title={option.label1}
               key={index}
               value={option.value}
@@ -68,6 +69,11 @@ function CustomSelect() {
               aria-selected={option.value === selectedOption ? 'true' : 'false'}
               onClick={() => {
                 handleOptionClick(option.value);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  handleOptionClick(option.value);
+                }
               }}
               className={`${index === 0 ? 'h-[68px] rounded-t-[8px] pt-[8px]' : index === options.length - 1 ? 'h-[68px] rounded-b-[8px] pb-[8px]' : 'h-[60px]'} flex  cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
             >

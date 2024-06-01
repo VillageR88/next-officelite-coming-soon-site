@@ -25,7 +25,7 @@ export default function DataProvider({ children }: { children: React.ReactNode }
       const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
       const currentDifferenceAsDate = new Date(currentDifference);
       setTimerValue({
-        days: (currentDifferenceAsDate.getDate() - 1).toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
+        days: currentDifferenceAsDate.getDate().toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
         hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
         mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
         sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
