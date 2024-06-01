@@ -18,8 +18,15 @@ export async function CreateInvoiceContactForm(
   if (!process.env.EMAIL) return prev;
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
+  let phone = formData.get('phone') as string;
+  phone = phone.replaceAll(' ', '');
+  phone = phone.replaceAll('-', '');
+  phone = phone.replaceAll('+', '');
+  phone = phone.replaceAll('(', '');
+  phone = phone.replaceAll(')', '');
   console.log('name: ', name);
   console.log('email: ', email);
+  console.log('phone: ', phone);
   let errorData = {
     email: prev.errorData.email,
     company: prev.errorData.company,
@@ -27,7 +34,11 @@ export async function CreateInvoiceContactForm(
     phone: prev.errorData.phone,
   };
   if (!name) errorData = { ...errorData, name: true };
+  else errorData = { ...errorData, name: false };
   if (!email || !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(email)) errorData = { ...errorData, email: true };
+  else errorData = { ...errorData, email: false };
+  if (!phone || !/^\d{7,15}$/.test(phone)) errorData = { ...errorData, phone: true };
+  else errorData = { ...errorData, phone: false };
   if (errorData.company || errorData.email || errorData.name || errorData.phone)
     return { errorData, number: prev.number + 1 };
 
