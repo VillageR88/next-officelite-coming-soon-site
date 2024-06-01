@@ -7,18 +7,17 @@ import iconCross from '@/public/assets/sign-up/icon-cross.svg';
 import Timer from '../components/Timer';
 import { useEffect, useState, useRef } from 'react';
 import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import type { ErrorData } from '@/app/_lib/interfaces';
+import Loader from '../components/Loader';
 
-function CustomSelect() {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string>('first');
-
+  const [selectedOption, setSelectedOption] = useState<string>('Basic Pack');
   const options = [
-    { value: 'first', label1: 'Basic Pack', label2: 'Free' },
-    { value: 'second', label1: 'Pro Pack', label2: '$9.99' },
-    { value: 'third', label1: 'Ultimate Pack', label2: '$19.99' },
+    { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
+    { value: 'Pro Pack', label1: 'Pro Pack', label2: '$9.99' },
+    { value: 'Ultimate Pack', label1: 'Ultimate Pack', label2: '$19.99' },
   ];
 
   const handleOptionClick = (value: string) => {
@@ -33,18 +32,20 @@ function CustomSelect() {
         setIsOpen(false);
       }
     };
-
     window.addEventListener('click', handleClick);
     return () => {
       window.removeEventListener('click', handleClick);
     };
-  }, [isOpen]);
+  }, [buttonRef, isOpen]);
 
   return (
     <div className="relative">
       <button
+        value={selectedOption}
+        key={'select-button'}
         ref={buttonRef}
         id="select-button"
+        name="select-button"
         type="button"
         onClick={() => {
           setIsOpen(!isOpen);
@@ -101,8 +102,23 @@ function CustomSelect() {
   );
 }
 
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      disabled={pending}
+      type="submit"
+      className="mt-[40px] flex h-[56px] w-full items-center justify-center bg-[#5175FF] transition-colors hover:bg-[#829CFF]"
+    >
+      {pending ? <Loader pending={pending} /> : 'Get on the list'}
+    </button>
+  );
+};
+
 export default function SignUp() {
   //trackedErrors is used to hide input's error when input changes - it's kind of clean up
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [trackedErrors, setTrackedErrors] = useState<{
     name: number;
     email: number;
@@ -120,7 +136,7 @@ export default function SignUp() {
       number: number;
     },
     FormData
-  >(CreateInvoiceContactForm, {
+  >((state, payload) => CreateInvoiceContactForm(state, payload, buttonRef.current?.value ?? ''), {
     errorData: { name: false, email: false, phone: false, company: false },
     number: 0,
   });
@@ -203,7 +219,7 @@ export default function SignUp() {
               />
             </div>
             <div className="w-full border-b">
-              <CustomSelect />
+              <CustomSelect buttonRef={buttonRef} />
             </div>
             <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
               <input
@@ -244,12 +260,7 @@ export default function SignUp() {
               />
             </div>
             <div className="w-full">
-              <button
-                type="submit"
-                className="mt-[40px] h-[56px] w-full bg-[#5175FF] transition-colors hover:bg-[#829CFF]"
-              >
-                Get on the list
-              </button>
+              <SubmitButton />
             </div>
           </form>
         </div>

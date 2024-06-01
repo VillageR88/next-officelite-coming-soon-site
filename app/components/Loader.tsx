@@ -10,7 +10,7 @@ export default function Loader({ pending }: { pending: boolean }) {
       strokeWidth="5"
       animationDuration="0.75"
       ariaLabel="rotating-lines-loading"
-      strokeColor="#inherit"
+      strokeColor="white"
     />
   );
 }
