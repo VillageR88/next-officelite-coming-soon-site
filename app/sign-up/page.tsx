@@ -13,12 +13,13 @@ import type { ErrorData } from '@/app/_lib/interfaces';
 import Loader from '../components/Loader';
 import { useRouter } from 'next/navigation';
 import { Routes } from '@/app/routes';
+import { useContext } from 'react';
+import { DataContext } from '@/app/_providers/DataContext';
 
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>('Basic Pack');
   const listboxRef = useRef<HTMLLIElement[]>([]);
-
   const options = useMemo(
     () => [
       { value: 'Basic Pack', label1: 'Basic Pack', label2: 'Free' },
@@ -28,7 +29,6 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
     [],
   );
   const optionsIndex = options.findIndex((option) => option.value === selectedOption);
-
   const handleOptionClick = (value: string) => {
     setSelectedOption(value);
     setIsOpen(false);
@@ -169,6 +169,7 @@ const SubmitButton = () => {
 };
 
 export default function SignUp() {
+  const { setShowMessage, setSelectedOption } = useContext(DataContext);
   //trackedErrors is used to hide input's error when input changes - it's kind of clean up
   const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -195,7 +196,11 @@ export default function SignUp() {
     number: 0,
     redirection: false,
   });
-  if (state.redirection) router.push(Routes.home);
+  if (state.redirection) {
+    if (buttonRef.current) setSelectedOption(buttonRef.current.value);
+    setShowMessage(true);
+    router.push(Routes.home);
+  }
   const firstColItems = {
     title: 'Work smarter. Save time.',
     description:
