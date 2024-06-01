@@ -2,6 +2,8 @@
 
 import nodemailer from 'nodemailer';
 import { ErrorData } from '@/app/_lib/interfaces';
+import { redirect } from 'next/navigation';
+import { Routes } from '@/app/routes';
 
 export async function CreateInvoiceContactForm(
   prev: { errorData: ErrorData; number: number },
@@ -16,6 +18,7 @@ export async function CreateInvoiceContactForm(
       pass: process.env.PASSWORD,
     },
   });
+
   console.log(selectedOption);
   if (!process.env.EMAIL) return prev;
   if (!selectedOption) return prev;
@@ -62,8 +65,5 @@ export async function CreateInvoiceContactForm(
       }
     });
   });
-  return {
-    errorData: { email: false, company: false, name: false, phone: false },
-    number: prev.number + 1,
-  };
+  redirect(Routes.home);
 }
