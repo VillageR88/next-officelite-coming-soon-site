@@ -47,5 +47,5 @@ input {
 }
 
 .inputDiv {
-  @apply flex items-center gap-4 border-b border-[#747B95]/50 pl-[16px] pr-[20px] w-full;
+  @apply flex items-center gap-4 border-b pl-[16px] pr-[20px] w-full;
 }

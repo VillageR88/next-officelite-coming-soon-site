@@ -195,7 +195,9 @@ export default function SignUp() {
             action={action}
             className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
           >
-            <div className="inputDiv">
+            <div
+              className={`inputDiv ${state.errorData.name && trackedErrors.name !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}
+            >
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, name: state.number });
@@ -214,7 +216,9 @@ export default function SignUp() {
                 height={20}
               />
             </div>
-            <div className="inputDiv">
+            <div
+              className={`inputDiv ${state.errorData.email && trackedErrors.email !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}
+            >
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, email: state.number });
@@ -236,7 +240,9 @@ export default function SignUp() {
             <div className="w-full border-b border-[#747B95]/50">
               <CustomSelect buttonRef={buttonRef} />
             </div>
-            <div className="inputDiv">
+            <div
+              className={`inputDiv ${state.errorData.phone && trackedErrors.phone !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}
+            >
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, phone: state.number });
@@ -255,7 +261,9 @@ export default function SignUp() {
                 height={20}
               />
             </div>
-            <div className="inputDiv">
+            <div
+              className={`inputDiv ${state.errorData.company && trackedErrors.company !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}
+            >
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, company: state.number });
