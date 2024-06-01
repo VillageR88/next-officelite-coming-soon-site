@@ -205,13 +205,17 @@ export default function SignUp() {
             <div className="w-full border-b">
               <CustomSelect />
             </div>
-            <div
-              onChange={() => {
-                setTrackedErrors({ ...trackedErrors, phone: state.number });
-              }}
-              className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]"
-            >
-              <input id="phone" name="phone" type="tel" placeholder="Phone Number" autoComplete="tel" />{' '}
+            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+              <input
+                onChange={() => {
+                  setTrackedErrors({ ...trackedErrors, phone: state.number });
+                }}
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone Number"
+                autoComplete="tel"
+              />
               <Image
                 className={state.errorData.phone && trackedErrors.phone !== state.number ? 'block' : 'hidden'}
                 src={iconCross as string}
@@ -221,7 +225,23 @@ export default function SignUp() {
               />
             </div>
             <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
-              <input id="company" placeholder="Company" type="text" autoComplete="organization" />
+              <input
+                onChange={() => {
+                  setTrackedErrors({ ...trackedErrors, company: state.number });
+                }}
+                id="company"
+                name="company"
+                placeholder="Company"
+                type="text"
+                autoComplete="organization"
+              />
+              <Image
+                className={state.errorData.company && trackedErrors.company !== state.number ? 'block' : 'hidden'}
+                src={iconCross as string}
+                alt="cross icon"
+                width={20}
+                height={20}
+              />
             </div>
             <div className="w-full">
               <button

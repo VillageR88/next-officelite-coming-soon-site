@@ -24,9 +24,7 @@ export async function CreateInvoiceContactForm(
   phone = phone.replaceAll('+', '');
   phone = phone.replaceAll('(', '');
   phone = phone.replaceAll(')', '');
-  console.log('name: ', name);
-  console.log('email: ', email);
-  console.log('phone: ', phone);
+  const company = formData.get('company') as string;
   let errorData = {
     email: prev.errorData.email,
     company: prev.errorData.company,
@@ -37,12 +35,14 @@ export async function CreateInvoiceContactForm(
   else errorData = { ...errorData, name: false };
   if (!email || !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(email)) errorData = { ...errorData, email: true };
   else errorData = { ...errorData, email: false };
-  if (!phone || !/^\d{7,15}$/.test(phone)) errorData = { ...errorData, phone: true };
+  if (phone && !/^\d{7,15}$/.test(phone)) errorData = { ...errorData, phone: true };
   else errorData = { ...errorData, phone: false };
+  //if (!company) errorData = { ...errorData, company: true };
+  //else errorData = { ...errorData, company: false };
   if (errorData.company || errorData.email || errorData.name || errorData.phone)
     return { errorData, number: prev.number + 1 };
 
-  const htmlContent = `Hello!<br/><br/>Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
+  const htmlContent = `Hello! ${name}${company ? ' @' + company.toString() : ''}<br/><br/>Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
   const mailOptions = {
     from: process.env.EMAIL,
     to: email,
