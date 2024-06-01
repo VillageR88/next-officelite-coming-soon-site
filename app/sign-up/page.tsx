@@ -10,6 +10,8 @@ import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
 import { useFormState, useFormStatus } from 'react-dom';
 import type { ErrorData } from '@/app/_lib/interfaces';
 import Loader from '../components/Loader';
+import { useRouter } from 'next/navigation';
+import { Routes } from '@/app/routes';
 
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -118,6 +120,7 @@ const SubmitButton = () => {
 
 export default function SignUp() {
   //trackedErrors is used to hide input's error when input changes - it's kind of clean up
+  const router = useRouter();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [trackedErrors, setTrackedErrors] = useState<{
     name: number;
@@ -134,13 +137,15 @@ export default function SignUp() {
     {
       errorData: ErrorData;
       number: number;
+      redirection: boolean;
     },
     FormData
   >((state, payload) => CreateInvoiceContactForm(state, payload, buttonRef.current?.value), {
     errorData: { name: false, email: false, phone: false, company: false },
     number: 0,
+    redirection: false,
   });
-
+  if (state.redirection) router.push(Routes.home);
   const firstColItems = {
     title: 'Work smarter. Save time.',
     description:
@@ -268,6 +273,3 @@ export default function SignUp() {
     </main>
   );
 }
-
-//1020
-//420

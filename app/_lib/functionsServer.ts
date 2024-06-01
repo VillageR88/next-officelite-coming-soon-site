@@ -2,14 +2,12 @@
 
 import nodemailer from 'nodemailer';
 import { ErrorData } from '@/app/_lib/interfaces';
-import { redirect } from 'next/navigation';
-import { Routes } from '@/app/routes';
 
 export async function CreateInvoiceContactForm(
-  prev: { errorData: ErrorData; number: number },
+  prev: { errorData: ErrorData; number: number; redirection: boolean },
   formData: FormData,
   selectedOption: string | undefined,
-): Promise<{ errorData: ErrorData; number: number }> {
+): Promise<{ errorData: ErrorData; number: number; redirection: boolean }> {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     service: 'gmail',
@@ -46,7 +44,7 @@ export async function CreateInvoiceContactForm(
   //if (!company) errorData = { ...errorData, company: true };
   //else errorData = { ...errorData, company: false };
   if (errorData.company || errorData.email || errorData.name || errorData.phone)
-    return { errorData, number: prev.number + 1 };
+    return { errorData, number: prev.number + 1, redirection: false };
 
   const htmlContent = `Hello ${name}${company ? ' @' + company.toString() : ''}<br/><br/>Thank you for selecting ${selectedOption} as your product!<br/><br/>Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
   const mailOptions = {
@@ -65,5 +63,5 @@ export async function CreateInvoiceContactForm(
       }
     });
   });
-  redirect(Routes.home);
+  return { errorData, number: prev.number + 1, redirection: true };
 }
