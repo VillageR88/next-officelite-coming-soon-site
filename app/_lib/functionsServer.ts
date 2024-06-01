@@ -16,17 +16,21 @@ export async function CreateInvoiceContactForm(
     },
   });
   if (!process.env.EMAIL) return prev;
+  const name = formData.get('name') as string;
   const email = formData.get('email') as string;
-  if (!email || !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(email))
-    return {
-      errorData: {
-        email: true,
-        company: prev.errorData.company,
-        name: prev.errorData.name,
-        phone: prev.errorData.phone,
-      },
-      number: prev.number + 1,
-    };
+  console.log('name: ', name);
+  console.log('email: ', email);
+  let errorData = {
+    email: prev.errorData.email,
+    company: prev.errorData.company,
+    name: prev.errorData.name,
+    phone: prev.errorData.phone,
+  };
+  if (!name) errorData = { ...errorData, name: true };
+  if (!email || !/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/.test(email)) errorData = { ...errorData, email: true };
+  if (errorData.company || errorData.email || errorData.name || errorData.phone)
+    return { errorData, number: prev.number + 1 };
+
   const htmlContent = `Hello!<br/><br/>Thank you for contacting us. We will get back to you as soon as possible.<br/><br/> If you received this email by mistake, please ignore it.<br/><br/>Best regards,<br/><br/><a href="https://www.frontendmentor.io/profile/VillageR88">VillageR88</a><br/>`;
   const mailOptions = {
     from: process.env.EMAIL,

@@ -102,6 +102,7 @@ function CustomSelect() {
 }
 
 export default function SignUp() {
+  //trackedErrors is used to hide input's error when input changes - it's kind of clean up
   const [trackedErrors, setTrackedErrors] = useState<{
     name: number;
     email: number;
@@ -164,7 +165,23 @@ export default function SignUp() {
             className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center divide-[#747B95]/50 rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
           >
             <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
-              <input id="name" type="text" placeholder="Name" autoComplete="name" />
+              <input
+                onChange={() => {
+                  setTrackedErrors({ ...trackedErrors, name: state.number });
+                }}
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Name"
+                autoComplete="name"
+              />
+              <Image
+                className={state.errorData.name && trackedErrors.name !== state.number ? 'block' : 'hidden'}
+                src={iconCross as string}
+                alt="cross icon"
+                width={20}
+                height={20}
+              />
             </div>
             <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
               <input
@@ -172,6 +189,7 @@ export default function SignUp() {
                   setTrackedErrors({ ...trackedErrors, email: state.number });
                 }}
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Email Address"
                 autoComplete="email"
