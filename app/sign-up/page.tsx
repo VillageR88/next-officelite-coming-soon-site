@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import logo from '@/public/assets/shared/logo.svg';
-import arrowIcon from '@/public/assets/sign-up/icon-arrow-down.svg';
+import iconArrow from '@/public/assets/sign-up/icon-arrow-down.svg';
+import iconCross from '@/public/assets/sign-up/icon-cross.svg';
 import Timer from '../components/Timer';
 import { useEffect, useState, useRef } from 'react';
 import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
@@ -60,10 +61,10 @@ function CustomSelect() {
             </span>
           </div>
           <Image
-            className={`h-[8px] w-[13px] transition duration-[350] ${isOpen ? 'scale-100' : 'scale-[-100%]'}`}
+            className={`h-[8px] w-[13px] transition duration-[300] ${isOpen ? 'scale-100' : 'scale-[-100%]'}`}
             width={13}
             height={8}
-            src={arrowIcon as string}
+            src={iconArrow as string}
             alt="arrow icon"
           />
         </div>
@@ -71,7 +72,7 @@ function CustomSelect() {
       <ul
         title={selectedOption}
         role="listbox"
-        className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[250]`}
+        className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[200]`}
       >
         {options.map((option, index) => (
           <li
@@ -101,6 +102,17 @@ function CustomSelect() {
 }
 
 export default function SignUp() {
+  const [trackedErrors, setTrackedErrors] = useState<{
+    name: number;
+    email: number;
+    phone: number;
+    company: number;
+  }>({
+    name: 0,
+    email: 0,
+    phone: 0,
+    company: 0,
+  });
   const [state, action] = useFormState<
     {
       errorData: ErrorData;
@@ -111,7 +123,6 @@ export default function SignUp() {
     errorData: { name: false, email: false, phone: false, company: false },
     number: 0,
   });
-  console.log(state);
 
   const firstColItems = {
     title: 'Work smarter. Save time.',
@@ -148,22 +159,38 @@ export default function SignUp() {
             />
           </div>
           <form
+            noValidate
             action={action}
             className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center divide-[#747B95]/50 rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
           >
-            <div className="w-full border-b">
+            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
               <input id="name" type="text" placeholder="Name" autoComplete="name" />
             </div>
-            <div className="w-full border-b">
-              <input id="email" type="email" placeholder="Email Address" autoComplete="email" />
+            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+              <input
+                onChange={() => {
+                  setTrackedErrors({ ...trackedErrors, email: state.number });
+                }}
+                id="email"
+                type="email"
+                placeholder="Email Address"
+                autoComplete="email"
+              />
+              <Image
+                className={state.errorData.email && trackedErrors.email !== state.number ? 'block' : 'hidden'}
+                src={iconCross as string}
+                alt="cross icon"
+                width={20}
+                height={20}
+              />
             </div>
             <div className="w-full border-b">
               <CustomSelect />
             </div>
-            <div className="w-full border-b">
+            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
               <input id="phone" type="tel" placeholder="Phone Number" autoComplete="tel" />
             </div>
-            <div className="w-full border-b">
+            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
               <input id="company" placeholder="Company" type="text" autoComplete="organization" />
             </div>
             <div className="w-full">

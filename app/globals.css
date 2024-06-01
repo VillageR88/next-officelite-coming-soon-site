@@ -43,5 +43,5 @@ button {
 }
 
 input {
-  @apply h-[69px] w-full px-[16px] text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
+  @apply h-[69px] w-full text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
 }
