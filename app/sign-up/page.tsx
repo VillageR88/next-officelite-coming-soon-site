@@ -4,6 +4,7 @@ import Image from 'next/image';
 import logo from '@/public/assets/shared/logo.svg';
 import iconArrow from '@/public/assets/sign-up/icon-arrow-down.svg';
 import iconCross from '@/public/assets/sign-up/icon-cross.svg';
+import iconCheck from '@/public/assets/sign-up/icon-check.svg';
 import Timer from '../components/Timer';
 import { useEffect, useState, useRef } from 'react';
 import { CreateInvoiceContactForm } from '@/app/_lib/functionsServer';
@@ -75,7 +76,7 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
       <ul
         title={selectedOption}
         role="listbox"
-        className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[200]`}
+        className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute ml-[-1%] mt-[8px] flex w-[102%] flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[200]`}
       >
         {options.map((option, index) => (
           <li
@@ -93,10 +94,19 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
                 handleOptionClick(option.value);
               }
             }}
-            className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
+            className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center justify-between px-[32px] text-[16px] font-bold hover:bg-[#5175FF]/10`}
           >
-            <span className="text-[#11121a]">{option.label1}</span>
-            <span className="text-[#333950]/40">{option.label2}</span>
+            <div className="flex gap-[8px]">
+              <span className="text-[#11121a]">{option.label1}</span>
+              <span className="text-[#333950]/40">{option.label2}</span>
+            </div>
+            <Image
+              className={`h-[12px] w-[15px] ${option.value === selectedOption ? 'block' : 'hidden'}`}
+              width={15}
+              height={12}
+              src={option.value === selectedOption ? (iconCheck as string) : ''}
+              alt="check icon"
+            />
           </li>
         ))}
       </ul>
@@ -183,9 +193,9 @@ export default function SignUp() {
           <form
             noValidate
             action={action}
-            className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center divide-[#747B95]/50 rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
+            className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
           >
-            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+            <div className="inputDiv">
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, name: state.number });
@@ -204,7 +214,7 @@ export default function SignUp() {
                 height={20}
               />
             </div>
-            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+            <div className="inputDiv">
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, email: state.number });
@@ -223,10 +233,10 @@ export default function SignUp() {
                 height={20}
               />
             </div>
-            <div className="w-full border-b">
+            <div className="w-full border-b border-[#747B95]/50">
               <CustomSelect buttonRef={buttonRef} />
             </div>
-            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+            <div className="inputDiv">
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, phone: state.number });
@@ -245,7 +255,7 @@ export default function SignUp() {
                 height={20}
               />
             </div>
-            <div className="flex w-full items-center gap-4 border-b pl-[16px] pr-[20px]">
+            <div className="inputDiv">
               <input
                 onChange={() => {
                   setTrackedErrors({ ...trackedErrors, company: state.number });

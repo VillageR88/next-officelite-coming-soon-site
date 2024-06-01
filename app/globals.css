@@ -45,3 +45,7 @@ button {
 input {
   @apply h-[69px] w-full text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
 }
+
+.inputDiv {
+  @apply flex items-center gap-4 border-b border-[#747B95]/50 pl-[16px] pr-[20px] w-full;
+}
