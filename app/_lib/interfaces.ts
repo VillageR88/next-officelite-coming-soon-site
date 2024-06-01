@@ -5,8 +5,9 @@ export interface TimerValue {
   sec: string;
 }
 
-export enum Message {
-  empty = 'empty',
-  invalid = 'invalid',
-  success = 'success',
+export interface ErrorData {
+  name: boolean;
+  email: boolean;
+  phone: boolean;
+  company: boolean;
 }
