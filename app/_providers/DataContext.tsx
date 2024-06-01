@@ -23,12 +23,15 @@ export default function DataProvider({ children }: { children: React.ReactNode }
   useEffect(() => {
     const timeFunction = () => {
       const currentDifference = current4thOfNextMonth.getTime() - new Date().getTime();
-      const currentDifferenceAsDate = new Date(currentDifference);
+      const days = Math.floor(currentDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((currentDifference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((currentDifference / (1000 * 60)) % 60);
+      const seconds = Math.floor((currentDifference / 1000) % 60);
       setTimerValue({
-        days: currentDifferenceAsDate.getDate().toLocaleString('en-UK', { minimumIntegerDigits: 1 }),
-        hours: currentDifferenceAsDate.getHours().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-        mi: currentDifferenceAsDate.getMinutes().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
-        sec: currentDifferenceAsDate.getSeconds().toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        days: days.toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        hours: hours.toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        mi: minutes.toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
+        sec: seconds.toLocaleString('en-UK', { minimumIntegerDigits: 2 }),
       });
     };
     if (timerValue.days === '00' && timerValue.hours === '00' && timerValue.mi === '00' && timerValue.sec === '00') {
