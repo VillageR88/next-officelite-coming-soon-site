@@ -1,7 +1,85 @@
+'use client';
+
 import Image from 'next/image';
 import logo from '@/public/assets/shared/logo.svg';
 import Timer from '../components/Timer';
-import CustomSelect from '@/app/sign-up/CustomSelect';
+import { useEffect, useState, useRef } from 'react';
+
+function CustomSelect() {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string>('first');
+
+  const options = [
+    { value: 'first', label1: 'Basic Pack', label2: 'Free' },
+    { value: 'second', label1: 'Pro Pack', label2: '$9.99' },
+    { value: 'third', label1: 'Ultimate Pack', label2: '$19.99' },
+  ];
+
+  const handleOptionClick = (value: string) => {
+    setSelectedOption(value);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClick = (event: MouseEvent) => {
+      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('click', handleClick);
+    };
+  }, [isOpen]);
+
+  return (
+    <div className="relative">
+      <button
+        ref={buttonRef}
+        id="select-button"
+        type="button"
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        className="h-[69px] w-full px-4 text-left text-black"
+      >
+        <div className="flex gap-[8px]">
+          <span className="text-[#333950]">{options.find((option) => option.value === selectedOption)?.label1}</span>
+          <span className="text-[#333950]/40">{options.find((option) => option.value === selectedOption)?.label2}</span>
+        </div>
+      </button>
+      {isOpen && (
+        <ul
+          title={selectedOption}
+          role="listbox"
+          className="absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl"
+        >
+          {options.map((option, index) => (
+            <li
+              title={option.label1}
+              key={index}
+              value={option.value}
+              role="option"
+              aria-selected={option.value === selectedOption ? 'true' : 'false'}
+              onClick={() => {
+                handleOptionClick(option.value);
+              }}
+              className={`${index === 0 ? 'h-[68px] rounded-t-[8px] pt-[8px]' : index === options.length - 1 ? 'h-[68px] rounded-b-[8px] pb-[8px]' : 'h-[60px]'} flex  cursor-pointer items-center gap-[8px] px-4 text-[16px] font-bold hover:bg-[#5175FF]/10`}
+            >
+              <span className="text-[#11121a]">{option.label1}</span>
+              <span className="text-[#333950]/40">{option.label2}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export default function SignUp() {
   const firstColItems = {
@@ -52,10 +130,13 @@ export default function SignUp() {
               <input id="phone" type="tel" placeholder="Phone Number" autoComplete="tel" />
             </div>
             <div className="flex w-full flex-col">
-              <input id="company" placeholder="Company" type="text" />
+              <input id="company" placeholder="Company" type="text" autoComplete="organization" />
             </div>
             <div className="w-full">
-              <button type="submit" className="mt-[40px] h-[56px] w-full bg-[#5175FF]">
+              <button
+                type="submit"
+                className="mt-[40px] h-[56px] w-full bg-[#5175FF] transition-colors hover:bg-[#829CFF]"
+              >
                 Get on the list
               </button>
             </div>
