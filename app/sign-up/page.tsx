@@ -71,7 +71,7 @@ function CustomSelect() {
       <ul
         title={selectedOption}
         role="listbox"
-        className={`${isOpen ? 'opacity-100' : 'opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[250]`}
+        className={`${isOpen ? 'z-auto opacity-100' : '-z-10 opacity-0'} absolute mt-[8px] flex w-full flex-col divide-y divide-[#747B95]/25 rounded-[8px] border border-[#333950]/15 bg-white shadow-2xl transition duration-[250]`}
       >
         {options.map((option, index) => (
           <li
@@ -151,19 +151,19 @@ export default function SignUp() {
             action={action}
             className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center divide-[#747B95]/50 rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
           >
-            <div className="flex w-full flex-col border-b">
+            <div className="w-full border-b">
               <input id="name" type="text" placeholder="Name" autoComplete="name" />
             </div>
-            <div className="flex w-full flex-col border-b">
+            <div className="w-full border-b">
               <input id="email" type="email" placeholder="Email Address" autoComplete="email" />
             </div>
-            <div className="flex w-full flex-col border-b">
+            <div className="w-full border-b">
               <CustomSelect />
             </div>
-            <div className="flex w-full flex-col border-b">
+            <div className="w-full border-b">
               <input id="phone" type="tel" placeholder="Phone Number" autoComplete="tel" />
             </div>
-            <div className="flex w-full flex-col border-b">
+            <div className="w-full border-b">
               <input id="company" placeholder="Company" type="text" autoComplete="organization" />
             </div>
             <div className="w-full">
