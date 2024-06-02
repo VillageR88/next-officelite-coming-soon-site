@@ -4,7 +4,7 @@ import logo from '@/public/assets/shared/logo.svg';
 
 export default function Header() {
   return (
-    <header className="flex w-full max-w-[calc(1110px)] px-10 screen1200:px-0">
+    <header className="flex min-h-[700px] w-full max-w-[calc(1110px)] px-10 screen1200:px-0">
       <Image
         className=" mt-[81px] h-[30px] w-[155px]"
         width={155}
@@ -16,7 +16,7 @@ export default function Header() {
       <Image
         width={1134}
         height={1134}
-        className="ml-[337px] mt-[-419px] min-h-[1134px] min-w-[1134px]"
+        className="ml-[293px] mt-[-164px] size-full min-w-[666px] screenInBetween:ml-[337px] screenInBetween:mt-[-419px] screenInBetween:min-h-[1134px] screenInBetween:min-w-[1134px]"
         src={patternHeader as string}
         alt="background image"
       />
