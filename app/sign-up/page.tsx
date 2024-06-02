@@ -19,7 +19,6 @@ import { Package } from '@/app/_lib/interfaces';
 
 function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement> }) {
   const { preferredOption } = useContext(DataContext);
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<Package>(preferredOption);
   const listboxRef = useRef<HTMLLIElement[]>([]);
@@ -96,27 +95,29 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
         className="h-[69px] w-full px-4 text-left text-black"
       >
         <div className="flex items-center justify-between">
-          <div className="flex gap-[8px]">
+          <div className="flex items-center gap-[8px]">
             <span className="text-[#333950]">{options.find((option) => option.value === selectedOption)?.label1}</span>
-            <span
-              className={`text-[#333950]/40 ${
-                options.find((option) => option.value === selectedOption)?.label3
-                  ? 'line-through decoration-[#F05B5B]'
-                  : ''
-              }`}
-            >
-              {options.find((option) => option.value === selectedOption)?.label2}
-            </span>
-            <span
-              className={
-                options.find((option) => option.value === selectedOption)?.label3 ? 'text-[#F05B5B]' : 'hidden'
-              }
-            >
-              {options.find((option) => option.value === selectedOption)?.label3}
-            </span>
+            <div className="flex flex-col sm:flex-row sm:gap-2">
+              <span
+                className={`text-[#333950]/40 ${
+                  options.find((option) => option.value === selectedOption)?.label3
+                    ? 'line-through decoration-[#F05B5B]'
+                    : ''
+                }`}
+              >
+                {options.find((option) => option.value === selectedOption)?.label2}
+              </span>
+              <span
+                className={
+                  options.find((option) => option.value === selectedOption)?.label3 ? 'text-[#F05B5B]' : 'hidden'
+                }
+              >
+                {options.find((option) => option.value === selectedOption)?.label3}
+              </span>
+            </div>
           </div>
           <Image
-            className={`h-[8px] w-[13px] transition duration-[300] ${isOpen ? 'scale-100' : 'scale-[-100%]'}`}
+            className={`ml-2 h-[8px] w-[13px] transition duration-[300] ${isOpen ? 'scale-100' : 'scale-[-100%]'}`}
             width={13}
             height={8}
             src={iconArrow as string}
@@ -150,11 +151,11 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
                 handleOptionClick(option.value);
               }
             }}
-            className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center justify-between px-[32px] text-[16px] font-bold hover:bg-[#5175FF]/10`}
+            className={`${index === 0 ? 'rounded-t-[8px]' : index === options.length - 1 ? 'rounded-b-[8px]' : ''} flex h-[67px] cursor-pointer items-center justify-between px-[20px] text-[16px] font-bold hover:bg-[#5175FF]/10 sm:px-[32px]`}
           >
             <div className="flex items-center gap-[8px]">
               <span className="text-[#11121a]">{option.label1}</span>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row sm:gap-2">
                 <span className={`text-[#333950]/40 ${option.label3 ? 'line-through decoration-[#F05B5B]' : ''}`}>
                   {option.label2}
                 </span>
@@ -162,7 +163,7 @@ function CustomSelect({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElem
               </div>
             </div>
             <Image
-              className={`h-[12px] w-[15px] ${option.value === selectedOption ? 'block' : 'hidden'}`}
+              className={`ml-2 h-[12px] w-[15px] ${option.value === selectedOption ? 'block' : 'hidden'}`}
               width={15}
               height={12}
               src={iconCheck as string}
@@ -231,10 +232,10 @@ export default function SignUp() {
   return (
     <main className="relative z-0 flex min-h-dvh justify-center overflow-x-clip px-10 font-kumbhSans sm:min-h-screen">
       <div className="absolute -z-10 flex size-full flex-col bg-[#FAFAFA] lg:flex-row">
-        <div className="flex min-h-full w-[calc(50%)] flex-col items-start bg-[#FAFAFA]"></div>
+        <div className="flex min-h-full flex-col items-start bg-[#FAFAFA] bg-[url('../public/assets/home/bg-pattern-header.svg')] bg-[length:458px] bg-[50%_-135px] bg-no-repeat lg:w-[calc(50%)] lg:bg-none lg:bg-no-repeat"></div>
         <div className="mt-[-250px] min-h-[380px] bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[length:1540px] bg-[50%_50%] bg-no-repeat lg:ml-[600px] lg:mt-0 lg:min-h-full lg:w-1/2 lg:bg-[length:auto] lg:bg-[calc(0%-760px)_calc(0%-780px)]"></div>
       </div>
-      <div className="flex w-full max-w-[1110px] flex-col">
+      <div className="flex w-full max-w-[1110px] flex-col items-center lg:items-stretch">
         <Image
           className="mt-[81px] h-[30px] w-[155px]"
           width={155}
@@ -250,6 +251,7 @@ export default function SignUp() {
               <p className="text-[#747B95]">{firstColItems.description}</p>
             </section>
             <Timer
+              moreGap
               textColor1="text-[#333950]"
               textColor2="text-[#5175FF]"
               textColor3="text-[#333950]/50"
