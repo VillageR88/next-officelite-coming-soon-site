@@ -90,15 +90,15 @@ const MiddleBox = ({
 
   return (
     <li
-      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} screenInBetween:h-[508px] screenInBetween:w-[350px] screenInBetween:items-center screenInBetween:bg-[50%_102%] screenInBetween:px-0 flex flex-col items-start rounded-[13px] bg-[-320px_50%] bg-no-repeat px-[48px] py-[40px] text-center`}
+      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} flex flex-col items-center rounded-[13px] bg-[50%_102%] bg-no-repeat px-[48px] py-[40px] text-center md:items-start md:bg-[-320px_50%] screenInBetween:h-[508px] screenInBetween:w-[350px] screenInBetween:items-center screenInBetween:bg-[50%_102%] screenInBetween:px-0`}
     >
-      <div className="screenInBetween:flex-col flex w-full justify-between self-center">
-        <div className="screenInBetween:items-center flex flex-col items-start">
+      <div className="flex w-full flex-col items-center justify-between self-center md:flex-row screenInBetween:flex-col">
+        <div className="flex flex-col items-center md:items-start screenInBetween:items-center">
           <h2 className={text1Color}>{title}</h2>
           <p className={`${text1Color} p1 mt-[40px]`}>{paragraph1}</p>
           <p className={`${text1Color} p2 mt-[8px]`}>{paragraph2}</p>
         </div>
-        <div className="screenInBetween:items-center flex flex-col items-start self-center">
+        <div className="flex flex-col items-center self-center md:items-start screenInBetween:items-center">
           <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
           <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
           <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>{' '}
@@ -107,7 +107,6 @@ const MiddleBox = ({
       <Link href={Routes.signUp}>
         <button
           onClick={() => {
-            console.log('button clicked');
             setPreferredOption(preferredValue);
           }}
           type="button"
@@ -122,7 +121,7 @@ const MiddleBox = ({
 export default function MainRow2() {
   return (
     <div className="mt-[109px] w-full max-w-[1110px] px-10 screen1200:px-0">
-      <ul className="screenInBetween:flex-row flex flex-col justify-center gap-[30px]">
+      <ul className="flex flex-col justify-center gap-[30px] screenInBetween:flex-row">
         {itemList.map((item, index) => {
           return (
             <MiddleBox

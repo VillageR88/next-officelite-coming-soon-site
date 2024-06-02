@@ -14,7 +14,7 @@ export default function ButtonGetStarted({ shadow }: { shadow?: boolean }) {
           setPreferredOption(Package.Basic);
         }}
         type="button"
-        className={`${shadow ? 'shadow-[0_35px_20px_-18px_rgba(63,91,194,0.25)]' : ''} h-[56px] w-[171px] bg-[#5175FF] transition-colors hover:bg-[#829CFF]`}
+        className={`${shadow ? 'shadow-[0_25px_20px_-10px_rgba(63,91,194,0.25)]' : ''} h-[56px] w-[171px] bg-[#5175FF] transition-colors hover:bg-[#829CFF]`}
       >
         Get Started
       </button>

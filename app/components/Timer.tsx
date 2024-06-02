@@ -15,7 +15,7 @@ export default function Timer({
 }) {
   const { timerValue, current4thOfNextMonth } = useContext(DataContext);
   return (
-    <div className="flex flex-col justify-between text-center screenInBetween:text-start">
+    <div className="flex flex-col justify-between gap-[8px] text-center screenInBetween:gap-0 screenInBetween:text-start">
       <span className={`text-[16px] font-bold leading-[48px] tracking-[5px] ${textColor1}`}>
         COMING{' '}
         <span className="text-[#5175FF]">
