@@ -229,7 +229,7 @@ export default function SignUp() {
   };
 
   return (
-    <main className="relative z-0 flex min-h-dvh justify-center font-kumbhSans sm:min-h-screen">
+    <main className="relative z-0 flex min-h-dvh justify-center overflow-x-clip font-kumbhSans sm:min-h-screen">
       <div className="absolute -z-10 flex size-full bg-white">
         <div className="flex min-h-full w-[calc(50%)] flex-col items-start bg-white"></div>
         <div className="ml-[600px] min-h-full w-1/2 bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[calc(0%-760px)_calc(0%-780px)] bg-no-repeat"></div>
