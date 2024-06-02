@@ -11,9 +11,9 @@ const kumbhSans = Kumbh_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Maker pre-launch landing page',
-  description: 'Maker pre-launch landing page',
-  applicationName: 'Maker pre-launch landing page',
+  title: 'Officelite coming soon site',
+  description: 'Officelite coming soon site',
+  applicationName: 'Officelite coming soon site',
 } as const;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
