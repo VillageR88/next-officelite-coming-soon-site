@@ -20,7 +20,7 @@ export default function PopUp() {
 
   return (
     <div
-      className={`${showPopUp ? '' : '-translate-y-44'} fixed inset-0 flex h-fit justify-center px-[24px] transition-transform duration-500`}
+      className={`${showPopUp ? '' : '-translate-y-full'} fixed inset-0 flex h-fit justify-center px-[24px] transition-transform duration-500`}
     >
       <div className="mt-[24px] flex size-full h-fit min-h-[107px] max-w-[440px] flex-col gap-[8px] rounded-[12px] bg-[#5175FF] p-[24px]">
         <div className="flex items-center gap-[8px]">
