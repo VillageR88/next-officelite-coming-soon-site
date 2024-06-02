@@ -28,7 +28,7 @@ export default function Timer({
             .toUpperCase()}
         </span>
       </span>
-      <div className="evenSmallerScreen:grid-cols-2 verySmallScreen:flex verySmallScreen:gap-[16px] grid gap-[6px] md:h-[128px] md:w-[448px]">
+      <div className="grid gap-[6px] evenSmallerScreen:grid-cols-2 verySmallScreen:flex verySmallScreen:gap-[16px] md:h-[128px] md:w-[448px]">
         {Object.keys(timerValue).map((key) => (
           <div
             className={`flex h-[92px] w-[72px] flex-col items-center justify-center rounded-[13px] md:h-[128px] md:w-[100px] md:gap-[2px] ${backgroundColor} pt-[6px] md:pt-[16px]`}
