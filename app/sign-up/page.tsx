@@ -235,7 +235,7 @@ export default function SignUp() {
         <div className="flex min-h-full flex-col items-start bg-[#FAFAFA] bg-[url('../public/assets/home/bg-pattern-header.svg')] bg-[length:458px] bg-[50%_-135px] bg-no-repeat lg:w-[calc(50%)] lg:bg-none lg:bg-no-repeat"></div>
         <div className="mt-[-250px] min-h-[380px] bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[length:1540px] bg-[50%_50%] bg-no-repeat lg:ml-[600px] lg:mt-0 lg:min-h-full lg:w-1/2 lg:bg-[length:auto] lg:bg-[calc(0%-760px)_calc(0%-780px)]"></div>
       </div>
-      <div className="flex w-full max-w-[1110px] flex-col items-center lg:items-stretch">
+      <div className="flex w-full max-w-[1110px] flex-col items-center pb-0 lg:items-stretch lg:pb-12">
         <Image
           className="mt-[81px] h-[30px] w-[155px]"
           width={155}
