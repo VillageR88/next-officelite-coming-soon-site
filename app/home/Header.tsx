@@ -16,7 +16,7 @@ export default function Header() {
       <Image
         width={1134}
         height={1134}
-        className="mt-[-340px] size-full min-w-[666px] md:ml-[293px] md:mt-[-164px] screenInBetween:ml-[337px] screenInBetween:mt-[-419px] screenInBetween:min-h-[1134px] screenInBetween:min-w-[1134px]"
+        className="mt-[-340px] size-full min-w-[666px] md:ml-[293px] md:mt-[-164px] lg:ml-[337px] lg:mt-[-419px] lg:min-h-[1134px] lg:min-w-[1134px]"
         src={patternHeader as string}
         alt="background image"
       />

@@ -229,10 +229,10 @@ export default function SignUp() {
   };
 
   return (
-    <main className="relative z-0 flex min-h-dvh justify-center overflow-x-clip font-kumbhSans sm:min-h-screen">
-      <div className="absolute -z-10 flex size-full bg-white">
-        <div className="flex min-h-full w-[calc(50%)] flex-col items-start bg-white"></div>
-        <div className="ml-[600px] min-h-full w-1/2 bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[calc(0%-760px)_calc(0%-780px)] bg-no-repeat"></div>
+    <main className="relative z-0 flex min-h-dvh justify-center overflow-x-clip px-10 font-kumbhSans sm:min-h-screen">
+      <div className="absolute -z-10 flex size-full flex-col bg-[#FAFAFA] lg:flex-row">
+        <div className="flex min-h-full w-[calc(50%)] flex-col items-start bg-[#FAFAFA]"></div>
+        <div className="mt-[-250px] min-h-[380px] bg-[#25293A] bg-[url('../public/assets/sign-up/bg-pattern-side.svg')] bg-[length:1540px] bg-[50%_50%] bg-no-repeat lg:ml-[600px] lg:mt-0 lg:min-h-full lg:w-1/2 lg:bg-[length:auto] lg:bg-[calc(0%-760px)_calc(0%-780px)]"></div>
       </div>
       <div className="flex w-full max-w-[1110px] flex-col">
         <Image
@@ -243,9 +243,9 @@ export default function SignUp() {
           alt="logo"
           priority
         />
-        <div className="flex gap-[125px]">
-          <div className="mt-[154px] flex max-w-[540px] flex-col gap-[40px]">
-            <section className="flex flex-col gap-[24px]">
+        <div className="flex flex-col items-center justify-between lg:flex-row lg:items-start lg:gap-[60px] xl:gap-[125px]">
+          <div className="mt-[80px] flex w-full max-w-[540px] flex-col gap-[40px] md:mt-[104px] lg:mt-[154px]">
+            <section className="flex flex-col items-center gap-[24px] text-center lg:items-start lg:text-start">
               <h1 className="text-[#333950]">{firstColItems.title}</h1>
               <p className="text-[#747B95]">{firstColItems.description}</p>
             </section>
@@ -259,7 +259,7 @@ export default function SignUp() {
           <form
             noValidate
             action={action}
-            className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-[0_30px_30px_-12px_rgba(75,92,154,0.25)]"
+            className="mt-[64px] flex min-h-[508px] w-full flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-[0_30px_30px_-12px_rgba(75,92,154,0.25)] sm:w-fit sm:min-w-[445px] md:mt-[104px] lg:mt-[126px]"
           >
             <div
               className={`inputDiv ${state.errorData.name && trackedErrors.name !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}

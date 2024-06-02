@@ -15,7 +15,7 @@ export default function Timer({
 }) {
   const { timerValue, current4thOfNextMonth } = useContext(DataContext);
   return (
-    <div className="flex flex-col justify-between gap-[8px] text-center screenInBetween:gap-0 screenInBetween:text-start">
+    <div className="flex flex-col items-center justify-between gap-[8px] text-center lg:items-start screenInBetween:gap-0 screenInBetween:text-start">
       <span className={`text-[16px] font-bold leading-[48px] tracking-[5px] ${textColor1}`}>
         COMING{' '}
         <span className="text-[#5175FF]">
@@ -24,7 +24,7 @@ export default function Timer({
             .toUpperCase()}
         </span>
       </span>
-      <div className="flex gap-[16px] md:h-[128px] md:w-[448px]">
+      <div className="evenSmallerScreen:grid-cols-2 verySmallScreen:flex grid gap-[16px] md:h-[128px] md:w-[448px]">
         {Object.keys(timerValue).map((key) => (
           <div
             className={`flex h-[92px] w-[72px] flex-col items-center justify-center rounded-[13px] md:h-[128px] md:w-[100px] md:gap-[2px] ${backgroundColor} pt-[6px] md:pt-[16px]`}
