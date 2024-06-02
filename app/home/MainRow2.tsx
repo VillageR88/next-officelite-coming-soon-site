@@ -90,14 +90,20 @@ const MiddleBox = ({
 
   return (
     <li
-      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} flex h-[508px] w-[350px] flex-col items-center rounded-[13px] bg-[50%_102%] bg-no-repeat py-[40px]`}
+      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} screenInBetween:h-[508px] screenInBetween:w-[350px] screenInBetween:items-center screenInBetween:bg-[50%_102%] screenInBetween:px-0 flex flex-col items-start rounded-[13px] bg-[-320px_50%] bg-no-repeat px-[48px] py-[40px] text-center`}
     >
-      <h2 className={text1Color}>{title}</h2>
-      <p className={`${text1Color} p1 mt-[40px]`}>{paragraph1}</p>
-      <p className={`${text1Color} p2 mt-[8px]`}>{paragraph2}</p>
-      <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
-      <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
-      <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>
+      <div className="screenInBetween:flex-col flex w-full justify-between self-center">
+        <div className="screenInBetween:items-center flex flex-col items-start">
+          <h2 className={text1Color}>{title}</h2>
+          <p className={`${text1Color} p1 mt-[40px]`}>{paragraph1}</p>
+          <p className={`${text1Color} p2 mt-[8px]`}>{paragraph2}</p>
+        </div>
+        <div className="screenInBetween:items-center flex flex-col items-start self-center">
+          <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
+          <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
+          <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>{' '}
+        </div>
+      </div>
       <Link href={Routes.signUp}>
         <button
           onClick={() => {
@@ -116,7 +122,7 @@ const MiddleBox = ({
 export default function MainRow2() {
   return (
     <div className="mt-[109px] w-full max-w-[1110px] px-10 screen1200:px-0">
-      <ul className="flex justify-center gap-[30px]">
+      <ul className="screenInBetween:flex-row flex flex-col justify-center gap-[30px]">
         {itemList.map((item, index) => {
           return (
             <MiddleBox

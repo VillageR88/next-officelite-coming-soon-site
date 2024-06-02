@@ -11,6 +11,7 @@ const config: Config = {
       screens: {
         tablet: '700px',
         screen1200: '1200px',
+        screenInBetween: '1000px',
       },
       fontFamily: {
         kumbhSans: ['var(--font-kumbhSans)'],
