@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <meta property="og:image" content={undefined} />
       </head>
-      <body className={`${kumbhSans.variable} overflow-x-clip bg-[#FAFAFA]`}>
+      <body className={`${kumbhSans.variable} bg-[#FAFAFA]`}>
         <DataProvider>{children}</DataProvider>
       </body>
     </html>

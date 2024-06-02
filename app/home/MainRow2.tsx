@@ -1,3 +1,10 @@
+'use client';
+import Link from 'next/link';
+import { Routes } from '../routes';
+import { DataContext } from '../_providers/DataContext';
+import { useContext } from 'react';
+import { Package } from '../_lib/interfaces';
+
 const itemList = [
   {
     title: 'Basic',
@@ -12,6 +19,8 @@ const itemList = [
     backgroundImage: undefined,
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
+    text: 'Try for Free',
+    preferredValue: Package.Basic,
   },
   {
     title: 'Pro',
@@ -26,6 +35,8 @@ const itemList = [
     backgroundImage: "bg-[url('../public/assets/home/bg-pattern-pricing.svg')]",
     buttonTextColor: 'text-[#5175FF] hover:text-[#829CFF]',
     buttonBackgroundColor: 'bg-[#FFFFFF]',
+    text: 'Now only $4.99 !',
+    preferredValue: Package.Pro,
   },
   {
     title: 'Ultimate',
@@ -40,6 +51,8 @@ const itemList = [
     backgroundImage: undefined,
     buttonTextColor: 'text-[#5175FF]',
     buttonBackgroundColor: 'bg-[#5175FF]/15 hover:bg-[#5175FF]/25',
+    text: 'Now only $9.99 !',
+    preferredValue: Package.Ultimate,
   },
 ];
 const MiddleBox = ({
@@ -55,6 +68,8 @@ const MiddleBox = ({
   backgroundImage,
   buttonTextColor,
   buttonBackgroundColor,
+  text,
+  preferredValue,
 }: {
   title: string;
   paragraph1: string;
@@ -68,29 +83,45 @@ const MiddleBox = ({
   backgroundImage?: string;
   buttonTextColor: string;
   buttonBackgroundColor: string;
+  text: string;
+  preferredValue: Package;
 }) => {
+  const { setPreferredOption } = useContext(DataContext);
+
   return (
     <li
-      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} flex h-[508px] w-[350px] flex-col items-center rounded-[13px] bg-[50%_102%] bg-no-repeat py-[40px]`}
+      className={`${[backgroundColor, backgroundImage].map((item) => item).join(' ')} flex flex-col items-center rounded-[13px] bg-[50%_102%] bg-no-repeat px-[48px] py-[40px] text-center md:items-start md:bg-[-320px_50%] lg:h-[508px] lg:w-[350px] lg:items-center lg:bg-[50%_102%] lg:px-0`}
     >
-      <h2 className={text1Color}>{title}</h2>
-      <p className={`${text1Color} p1 mt-[40px]`}>{paragraph1}</p>
-      <p className={`${text1Color} p2 mt-[8px]`}>{paragraph2}</p>
-      <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
-      <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
-      <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>
-      <button
-        className={`${[buttonBackgroundColor, buttonTextColor].map((item) => item).join(' ')} mt-[32px] h-[56px] w-[171px] transition-colors`}
-      >
-        Try for Free
-      </button>
+      <div className="flex w-full flex-col items-center justify-between self-center md:flex-row lg:flex-col">
+        <div className="flex flex-col items-center md:items-start lg:items-center">
+          <h2 className={text1Color}>{title}</h2>
+          <p className={`${text1Color} p1 mt-[40px]`}>{paragraph1}</p>
+          <p className={`${text1Color} p2 mt-[8px]`}>{paragraph2}</p>
+        </div>
+        <div className="flex flex-col items-center self-center md:items-start lg:items-center">
+          <p className={`${text2Color} p2 mt-[56px]`}>{paragraph3}</p>
+          <p className={`${text2Color} p2 mt-[16px]`}>{paragraph4}</p>
+          <p className={`${text2Color} p2 mt-[16px]`}>{paragraph5}</p>{' '}
+        </div>
+      </div>
+      <Link href={Routes.signUp}>
+        <button
+          onClick={() => {
+            setPreferredOption(preferredValue);
+          }}
+          type="button"
+          className={`${[buttonBackgroundColor, buttonTextColor].map((item) => item).join(' ')} mt-[32px] h-[56px] w-[171px] transition-colors`}
+        >
+          {text}
+        </button>
+      </Link>
     </li>
   );
 };
 export default function MainRow2() {
   return (
-    <div className="mt-[109px] w-full max-w-[1110px]">
-      <ul className="flex justify-center gap-[30px]">
+    <div className="mt-[109px] w-full max-w-[1110px] px-10 screen1200:px-0">
+      <ul className="flex flex-col justify-center gap-[30px] lg:flex-row">
         {itemList.map((item, index) => {
           return (
             <MiddleBox
@@ -107,6 +138,8 @@ export default function MainRow2() {
               backgroundImage={item.backgroundImage}
               buttonTextColor={item.buttonTextColor}
               buttonBackgroundColor={item.buttonBackgroundColor}
+              text={item.text}
+              preferredValue={item.preferredValue}
             />
           );
         })}

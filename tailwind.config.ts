@@ -9,7 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        evenSmallerScreen: '240px',
+        verySmallScreen: '360px',
         tablet: '700px',
+        screen1200: '1200px',
+        screenInBetween: '1024px',
       },
       fontFamily: {
         kumbhSans: ['var(--font-kumbhSans)'],

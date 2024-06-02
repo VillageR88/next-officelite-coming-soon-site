@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 }
 
 h1 {
-  @apply text-[56px] font-bold leading-[64px];
+  @apply screen1200:text-[56px] text-[40px] font-bold screen1200:leading-[64px] leading-[48px];
 }
 
 h2 {
@@ -40,4 +40,12 @@ p {
 
 button {
   @apply h-[56px] w-[171px] rounded-[28px] text-[16px] font-bold leading-[28px] text-[#FFFFFF];
+}
+
+input {
+  @apply h-[69px] w-full text-[16px] leading-[28px] outline-none placeholder:text-[#747B95]/50;
+}
+
+.inputDiv {
+  @apply flex items-center gap-4 border-b pl-[16px] pr-[20px] w-full;
 }
