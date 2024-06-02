@@ -259,7 +259,7 @@ export default function SignUp() {
           <form
             noValidate
             action={action}
-            className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-2xl"
+            className="mt-[126px] flex h-[508px] w-[445px] flex-col items-center rounded-[13px] bg-[#FFFFFF] px-[43px] pt-[16px] shadow-[0_30px_30px_-12px_rgba(75,92,154,0.25)]"
           >
             <div
               className={`inputDiv ${state.errorData.name && trackedErrors.name !== state.number ? 'border-[#F05B5B] text-[#F05B5B]' : 'border-[#747B95]/50 text-[#333950]'}`}

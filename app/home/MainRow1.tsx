@@ -13,7 +13,7 @@ export default function MainRow1() {
             collaboration platform built with an intuitive interface to improve productivity.
           </p>
         </section>
-        <ButtonGetStarted />
+        <ButtonGetStarted shadow />
       </div>
       <Image className="min-h-[531px] min-w-[475px]" src={image1 as string} alt="illustration charts" priority />
     </div>
