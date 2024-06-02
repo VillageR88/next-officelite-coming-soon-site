@@ -24,16 +24,16 @@ export default function Timer({
             .toUpperCase()}
         </span>
       </span>
-      <div className="flex h-[128px] w-[448px] gap-[16px]">
+      <div className="flex gap-[16px] md:h-[128px] md:w-[448px]">
         {Object.keys(timerValue).map((key) => (
           <div
-            className={`flex h-[128px] w-[100px] flex-col items-center justify-center gap-[2px] rounded-[13px] ${backgroundColor} pt-[16px]`}
+            className={`flex h-[92px] w-[72px] flex-col items-center justify-center rounded-[13px] md:h-[128px] md:w-[100px] md:gap-[2px] ${backgroundColor} pt-[6px] md:pt-[16px]`}
             key={key}
           >
-            <span className={`text-[56px] font-bold leading-[48px] ${textColor2}`}>
+            <span className={`text-[32px] font-bold leading-[38px] md:text-[56px] md:leading-[48px] ${textColor2}`}>
               {timerValue[key as keyof typeof timerValue]}
             </span>
-            <span className={`text-[16px] font-bold leading-[28px] ${textColor3}`}>{key}</span>
+            <span className={`text-[12px] font-bold leading-[28px] md:text-[16px] ${textColor3}`}>{key}</span>
           </div>
         ))}
       </div>
