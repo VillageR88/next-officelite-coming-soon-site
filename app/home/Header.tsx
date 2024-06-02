@@ -4,7 +4,7 @@ import logo from '@/public/assets/shared/logo.svg';
 
 export default function Header() {
   return (
-    <header className="flex w-full max-w-[calc(1110px)] ">
+    <header className="flex w-full max-w-[calc(1110px)] px-10 screen1200:px-0">
       <Image
         className=" mt-[81px] h-[30px] w-[155px]"
         width={155}

@@ -115,7 +115,7 @@ const MiddleBox = ({
 };
 export default function MainRow2() {
   return (
-    <div className="mt-[109px] w-full max-w-[1110px]">
+    <div className="mt-[109px] w-full max-w-[1110px] px-10 screen1200:px-0">
       <ul className="flex justify-center gap-[30px]">
         {itemList.map((item, index) => {
           return (

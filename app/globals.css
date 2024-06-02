@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 }
 
 h1 {
-  @apply text-[56px] font-bold leading-[64px];
+  @apply screen1200:text-[56px] text-[40px] font-bold screen1200:leading-[64px] leading-[48px];
 }
 
 h2 {

@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       screens: {
         tablet: '700px',
+        screen1200: '1200px',
       },
       fontFamily: {
         kumbhSans: ['var(--font-kumbhSans)'],
